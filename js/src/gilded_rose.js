@@ -6,58 +6,53 @@ function Item(name, sell_in, quality) {
 
 var items = []
 
+var MIN_QUALITY = 0;
+var MAX_QUALITY = 50;
+
 function update_quality() {
-  for (var i = 0; i < items.length; i++) {
-    if (items[i].name != 'Aged Brie' && items[i].name != 'Backstage passes to a TAFKAL80ETC concert') {
-      if (items[i].quality > 0) {
-        if (items[i].name != 'Sulfuras, Hand of Ragnaros') {
-          if (items[i].name.startsWith('Conjured') && items[i].quality > 1) {
-            items[i].quality = items[i].quality - 1
-          }
-          items[i].quality = items[i].quality - 1
-        }
-      }
-    } else {
-      if (items[i].quality < 50) {
-        items[i].quality = items[i].quality + 1
-        if (items[i].name == 'Backstage passes to a TAFKAL80ETC concert') {
-          if (items[i].sell_in < 11) {
-            if (items[i].quality < 50) {
-              items[i].quality = items[i].quality + 1
-            }
-          }
-          if (items[i].sell_in < 6) {
-            if (items[i].quality < 50) {
-              items[i].quality = items[i].quality + 1
-            }
-          }
-        }
-      }
+  items.forEach(function(item) {
+    var quality_delta = -1;
+
+    // Legendary item, doesn't change
+    if (item.name == 'Sulfuras, Hand of Ragnaros') {
+      return;
     }
-    if (items[i].name != 'Sulfuras, Hand of Ragnaros') {
-      items[i].sell_in = items[i].sell_in - 1;
+
+    // Expired items reduce quality twice as fast
+    if (item.sell_in <= 0) {
+      quality_delta *= 2;
     }
-    if (items[i].sell_in < 0) {
-      if (items[i].name != 'Aged Brie') {
-        if (items[i].name != 'Backstage passes to a TAFKAL80ETC concert') {
-          if (items[i].quality > 0) {
-            if (items[i].name != 'Sulfuras, Hand of Ragnaros') {
-              if (items[i].name.startsWith('Conjured') && items[i].quality > 1) {
-                items[i].quality = items[i].quality - 1
-              }
-              items[i].quality = items[i].quality - 1
-            }
-          }
-        } else {
-          items[i].quality = items[i].quality - items[i].quality
-        }
-      } else {
-        if (items[i].quality < 50) {
-          items[i].quality = items[i].quality + 1
-        }
+
+    // Conjured items reduce quality twice as fast
+    if (item.name.startsWith("Conjured")) {
+      quality_delta *= 2;
+    }
+
+    // Aged Brie improves with age
+    if (item.name == 'Aged Brie') {
+      quality_delta *= -1;
+    }
+
+    // Backstage passes have very specific quality-reduction logic
+    if (item.name == 'Backstage passes to a TAFKAL80ETC concert') {
+      if (item.sell_in <= 0) {
+        quality_delta = -1 * item.quality;
+      } else if (item.sell_in <= 5) {
+        quality_delta = 3;
+      } else if (item.sell_in <= 10) {
+        quality_delta = 2;
+      } else if (item.sell_in > 10) {
+        quality_delta = 1;
       }
     }
-  }
+
+    var new_quality = item.quality + quality_delta;
+    new_quality = Math.max(new_quality, MIN_QUALITY);
+    new_quality = Math.min(new_quality, MAX_QUALITY);
+
+    item.quality = new_quality;
+    item.sell_in = item.sell_in - 1;
+  });
 }
 
 function set_items(_items) {
