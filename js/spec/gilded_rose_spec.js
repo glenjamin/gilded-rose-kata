@@ -23,6 +23,12 @@ describe("Gilded Rose", function() {
     expect(get_items()[0].quality).toEqual(0);
   });
 
+  it("reduces quality by 2 when sell-in is negative", () => {
+    set_items([new Item("Teacup", -1, 2)]);
+    update_quality();
+    expect(get_items()[0].quality).toEqual(0);
+  });
+
   it("does reduce sell-in to negative numbers", () => {
     set_items([new Item("Teacup", 0, 0)]);
     update_quality();
@@ -70,13 +76,13 @@ describe("Gilded Rose", function() {
     expect(get_items()[0].quality).toEqual(80);
   });
 
-  it("increases quality of backstack passes over time", () => {
+  it("increases quality of backstage passes over time", () => {
     set_items([new Item("Backstage passes to a TAFKAL80ETC concert", 20, 5)]);
     update_quality();
     expect(get_items()[0].quality).toEqual(6);
   });
 
-  it("increases quality of backstack passes by 2 within 6-10 days", () => {
+  it("increases quality of backstage passes by 2 within 6-10 days", () => {
     set_items([new Item("Backstage passes to a TAFKAL80ETC concert", 10, 5)]);
     update_quality();
     expect(get_items()[0].quality).toEqual(7);
@@ -86,7 +92,7 @@ describe("Gilded Rose", function() {
     expect(get_items()[0].quality).toEqual(7);
   });
 
-  it("increases quality of backstack passes by 3 within 1-5 days", () => {
+  it("increases quality of backstage passes by 3 within 1-5 days", () => {
     set_items([new Item("Backstage passes to a TAFKAL80ETC concert", 5, 5)]);
     update_quality();
     expect(get_items()[0].quality).toEqual(8);
@@ -136,7 +142,8 @@ describe("Gilded Rose", function() {
     set_items([
       new Item("Teacup", 1, 1),
       new Item("Aged Brie", 5, 5),
-      new Item("Backstage passes to a TAFKAL80ETC concert", 0, 20)
+      new Item("Backstage passes to a TAFKAL80ETC concert", 0, 20),
+      new Item("Conjured Coathanger", -3, 5),
     ]);
 
     update_quality();
@@ -144,7 +151,8 @@ describe("Gilded Rose", function() {
     expect(get_items()).toEqual([
       new Item("Teacup", 0, 0),
       new Item("Aged Brie", 4, 6),
-      new Item("Backstage passes to a TAFKAL80ETC concert", -1, 0)
+      new Item("Backstage passes to a TAFKAL80ETC concert", -1, 0),
+      new Item("Conjured Coathanger", -4, 1),
     ]);
   });
 

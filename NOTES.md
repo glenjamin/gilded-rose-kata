@@ -55,3 +55,4 @@ The case of going from 1 - 2 = 0 for a conjured item breaks our simple logic, wh
 14:18
 While doing this it occurs that it might be more readable if the code is grouped by item, rather than grouped by the field it's operating on. Extracting the two changes into local variables should make this much simpler to achieve
 The use of negative if statement conditions is a bit tricky too, will try and stick to positive matches
+During the refactoring I also noticed a testcase i'd overlooked: sell-in being negative
