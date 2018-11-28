@@ -29,3 +29,6 @@ I'm doing this by reading the README specification, and iteratively writing test
 13:32
 Have set up jasmine to run on change as documented here: https://github.com/jasmine/jasmine-npm/issues/5
 `nodemon --exec jasmine`, using this to see test results as each test is added.
+
+13:52
+Completed regression pack and added README for how to run tests
