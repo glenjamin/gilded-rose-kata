@@ -12,6 +12,7 @@
   "author": "Glen Mailer",
   "license": "ISC",
   "devDependencies": {
-    "jasmine": "^3.3.0"
+    "jasmine": "^3.3.0",
+    "nyc": "^13.1.0"
   }
 }

@@ -62,3 +62,16 @@ Finished off the refactoring and committed - pretty happy with how this reads no
 
 14:46
 Considered assuming we received an answer about "Conjured Aged Brie" etc, but decided against this - partially in case it ends up being part of the pairing exercise.
+
+15:03
+After completing the kata, I got curious, so started googling around and reading up on some of the background on the exercise. The recommendations mostly seemed to align with how I'd approached things, but some articles also mentioned golden master testing or using code coverage tooling to gain confidence of the newly written regression suite.
+
+Golden master testing can be a bit tricky, as you need a decent set of inputs - if this was a production system then perhaps we could pull down some production telemetry to do this.
+
+Code coverage is much easier to do, NodeJS has decent tooling in this space which can also do conditional branch coverage. I ran the `nyc` coverage tool on my pre-refactoring commit and my post-refactoring commit to compare.
+
+The pre-refactoring commit identified a couple of branches I'd missed in my testcases - the backstage passes +2 and +3 ensuring they don't go over 50.
+
+Luckily, in my refactored version this logic is extracted out, so the code does perform the same - but it would have been better to have testcases for this explicitly. It does appear that the original code is faithful to the written specification, but this often isn't the case with legacy code.
+
+The coverage report on my refactored code shows almost full branch coverage, the only branches that are missed should be unreachable - in the `> 10` branch of the backstage passes logic (which I left in to try and show the boundaries better, but might be better off as an else statement), and in the shim code which maintains compatibility between nodejs and the browser.
