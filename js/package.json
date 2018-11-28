@@ -1,0 +1,17 @@
+{
+  "name": "gilded-rose-kata",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "directories": {
+    "lib": "lib"
+  },
+  "scripts": {
+    "test": "jasmine"
+  },
+  "author": "Glen Mailer",
+  "license": "ISC",
+  "devDependencies": {
+    "jasmine": "^3.3.0"
+  }
+}

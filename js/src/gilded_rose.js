@@ -53,3 +53,13 @@ function update_quality() {
     }
   }
 }
+
+if (typeof module === 'object') {
+  exports = module.exports = {Item, update_quality};
+  exports.setItems = function(_items) {
+    items = _items;
+  }
+  exports.getItems = function() {
+    return items;
+  }
+}
