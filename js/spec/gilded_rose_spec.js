@@ -115,13 +115,19 @@ describe("Gilded Rose", function() {
   });
 
   it("reduces quality twice as fast for expired conjured items", () => {
-    set_items([new Item("Conjured Umbrella", 0, 5)]);
+    set_items([new Item("Conjured Coathanger", 0, 5)]);
     update_quality();
     expect(get_items()[0].quality).toEqual(1);
   });
 
   it("doesnt reduce quality to negative for conjured items", () => {
     set_items([new Item("Conjured Sugar Jar", 5, 1)]);
+    update_quality();
+    expect(get_items()[0].quality).toEqual(0);
+  });
+
+  it("doesnt reduce quality to negative for expired conjured items", () => {
+    set_items([new Item("Conjured Coffee", 0, 3)]);
     update_quality();
     expect(get_items()[0].quality).toEqual(0);
   });

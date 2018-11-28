@@ -49,3 +49,9 @@ I'm going to use a pairwise-inspired scheme for the test data to ensure that con
 
 14:09
 The simple initial testcase for conjured items passes easily enough, so now we add some trickier scenarios
+
+The case of going from 1 - 2 = 0 for a conjured item breaks our simple logic, while this could be cobbled into the existing function it's getting rather unwieldy. I'm going to make the test pass, but then refactor the function to extract the limits and rules out a bit.
+
+14:18
+While doing this it occurs that it might be more readable if the code is grouped by item, rather than grouped by the field it's operating on. Extracting the two changes into local variables should make this much simpler to achieve
+The use of negative if statement conditions is a bit tricky too, will try and stick to positive matches
