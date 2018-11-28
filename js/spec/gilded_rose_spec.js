@@ -109,9 +109,15 @@ describe("Gilded Rose", function() {
   });
 
   it("reduces quality twice as fast for conjured items", () => {
-    set_items([new Item("Conjured Teacup", 5, 5)]);
+    set_items([new Item("Conjured Umbrella", 5, 5)]);
     update_quality();
     expect(get_items()[0].quality).toEqual(3);
+  });
+
+  it("doesnt reduce quality to negative for conjured items", () => {
+    set_items([new Item("Conjured Sugar Jar", 5, 1)]);
+    update_quality();
+    expect(get_items()[0].quality).toEqual(0);
   });
 
   it("applies adjustments to all items in the list", () => {

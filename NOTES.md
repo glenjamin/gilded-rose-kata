@@ -46,3 +46,6 @@ As this input isn't available for the test, I'm choosing to go with the simplest
 14:02
 Adding testcase for new behaviour, I'm going to try and remember to commit often during this phase so that the git history shows the intermediary steps
 I'm going to use a pairwise-inspired scheme for the test data to ensure that conjured is treated as a prefix, where each scenario uses a different conjured item. It would be possible to write code which only applies one aspect of the conjured logic to each test scenario and still pass these tests, but that code we'd expect to look obviously wrong.
+
+14:09
+The simple initial testcase for conjured items passes easily enough, so now we add some trickier scenarios
