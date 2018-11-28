@@ -102,6 +102,18 @@ describe("Gilded Rose", function() {
     expect(get_items()[0].quality).toEqual(0);
   });
 
+  it("reduces sell-in as normal for conjured items", () => {
+    set_items([new Item("Conjured Teacup", 5, 5)]);
+    update_quality();
+    expect(get_items()[0].sell_in).toEqual(4);
+  });
+
+  it("reduces quality twice as fast for conjured items", () => {
+    set_items([new Item("Conjured Teacup", 5, 5)]);
+    update_quality();
+    expect(get_items()[0].quality).toEqual(3);
+  });
+
   it("applies adjustments to all items in the list", () => {
     set_items([
       new Item("Teacup", 1, 1),
