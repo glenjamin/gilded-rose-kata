@@ -17,6 +17,15 @@ annoyingly the jasmine npm package leaves us with a deprecation warning that can
 
 13:12
 also had to add some module stuff to the files to make it work with nodejs
-have guarded these with feature detection code to keep backwards compatibility
+have guarded these with feature detection code to keep backwards compatibility with the existing API and browser-based test runner.
 
-I would have preferred to modify update_quality to accept the items array as an argument, but elected not to to keep backwards compatibility
+I would have preferred to modify update_quality to accept the items array as an argument, but elected not to to keep backwards compatibility. Have also stuck with existing naming style rather than the more populate js camelCase naming.
+
+13:25
+Skeleton nodejs support and test running is committed
+Now to add regression tests for existing behaviour
+I'm doing this by reading the README specification, and iteratively writing tests, trying to avoid looking at the real code yet if possible
+
+13:32
+Have set up jasmine to run on change as documented here: https://github.com/jasmine/jasmine-npm/issues/5
+`nodemon --exec jasmine`, using this to see test results as each test is added.

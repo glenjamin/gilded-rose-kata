@@ -54,12 +54,13 @@ function update_quality() {
   }
 }
 
+function set_items(_items) {
+  items = _items;
+}
+function get_items(_items) {
+  return items;
+}
+
 if (typeof module === 'object') {
-  exports = module.exports = {Item, update_quality};
-  exports.setItems = function(_items) {
-    items = _items;
-  }
-  exports.getItems = function() {
-    return items;
-  }
+  exports = module.exports = {Item, update_quality, set_items, get_items};
 }
